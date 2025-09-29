@@ -41,25 +41,40 @@ export function ChartPanel({ height = 400, className = '' }: ChartPanelProps) {
 
   return (
     <div className={className}>
-      <div className="space-y-4">
-        {/* Axis Controls */}
-        <div className="flex flex-col sm:flex-row gap-4">
-          <AxisSelector
-            label="X-Axis"
-            value={xAxis}
-            onChange={setXAxis}
-            className="flex-1"
-          />
-          <AxisSelector
-            label="Y-Axis" 
-            value={yAxis}
-            onChange={setYAxis}
-            className="flex-1"
-          />
+      <div className="space-y-6">
+        {/* Enhanced Axis Controls */}
+        <div className="bg-gradient-to-r from-blue-50/50 to-indigo-50/50 rounded-xl p-4 border border-blue-200/30">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center space-x-2">
+              <div className="bg-blue-500 p-1 rounded-lg">
+                <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                </svg>
+              </div>
+              <span className="text-sm font-bold text-gray-800">Chart Configuration</span>
+            </div>
+            <div className="text-xs text-blue-600 bg-blue-100 px-3 py-1 rounded-full font-medium">
+              {data.length.toLocaleString()} points
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <AxisSelector
+              label="📊 X-Axis"
+              value={xAxis}
+              onChange={setXAxis}
+              className="flex-1"
+            />
+            <AxisSelector
+              label="📈 Y-Axis" 
+              value={yAxis}
+              onChange={setYAxis}
+              className="flex-1"
+            />
+          </div>
         </div>
 
-        {/* Chart */}
-        <div className="border border-gray-200 rounded-lg bg-white">
+        {/* Enhanced Chart Container */}
+        <div className="bg-gradient-to-br from-white to-blue-50/30 border-2 border-blue-200/50 rounded-2xl p-2 shadow-lg">
           <EarthquakeScatterPlot
             data={data}
             xAxis={xAxis}
@@ -68,14 +83,24 @@ export function ChartPanel({ height = 400, className = '' }: ChartPanelProps) {
           />
         </div>
 
-        {/* Chart Info */}
-        <div className="text-sm text-gray-500 text-center">
-          {data.length > 0 && (
-            <p>
-              Showing {data.length} earthquake{data.length !== 1 ? 's' : ''} •{' '}
-              X: {xAxis} • Y: {yAxis}
-            </p>
-          )}
+        {/* Enhanced Chart Info */}
+        <div className="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-xl p-4 border border-indigo-200/50">
+          <div className="flex items-center justify-center space-x-4">
+            <div className="flex items-center space-x-2">
+              <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+              <span className="text-sm font-medium text-gray-700">
+                {data.length.toLocaleString()} earthquake{data.length !== 1 ? 's' : ''}
+              </span>
+            </div>
+            <div className="text-gray-400">•</div>
+            <div className="text-sm text-gray-600">
+              <span className="font-medium">X:</span> {xAxis.replace(/([A-Z])/g, ' $1').toLowerCase()}
+            </div>
+            <div className="text-gray-400">•</div>
+            <div className="text-sm text-gray-600">
+              <span className="font-medium">Y:</span> {yAxis.replace(/([A-Z])/g, ' $1').toLowerCase()}
+            </div>
+          </div>
         </div>
       </div>
     </div>
