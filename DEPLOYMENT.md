@@ -188,8 +188,3 @@ npm update
 npm audit
 npm audit fix
 ```
-
-### Performance Monitoring
-- Monitor bundle size with `npm run analyze`
-- Check Core Web Vitals in production
-- Monitor error rates and user feedback

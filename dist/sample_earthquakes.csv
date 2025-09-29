@@ -1,0 +1,11 @@
+time,latitude,longitude,depth,mag,magType,nst,gap,dmin,rms,net,id,updated,place,type,horizontalError,depthError,magError,magNst,status,locationSource,magSource
+2023-12-01T10:30:00.000Z,37.7749,-122.4194,10.5,4.2,ml,25,85,0.05,0.15,nc,nc73123456,2023-12-01T10:35:00.000Z,"5km NE of San Francisco, CA",earthquake,0.8,2.1,0.1,15,automatic,nc,nc
+2023-12-01T11:15:00.000Z,34.0522,-118.2437,8.2,3.8,ml,18,92,0.08,0.12,ci,ci38765432,2023-12-01T11:20:00.000Z,"3km SW of Los Angeles, CA",earthquake,1.2,1.8,0.12,12,automatic,ci,ci
+2023-12-01T12:45:00.000Z,40.7589,-73.9851,12.0,2.9,ml,12,110,0.12,0.18,ld,ld12345678,2023-12-01T12:50:00.000Z,"2km E of Manhattan, NY",earthquake,1.5,2.5,0.15,8,reviewed,ld,ld
+2023-12-01T14:22:00.000Z,41.8781,-87.6298,6.8,3.2,ml,20,95,0.06,0.14,ld,ld87654321,2023-12-01T14:27:00.000Z,"4km N of Chicago, IL",earthquake,0.9,2.0,0.11,14,automatic,ld,ld
+2023-12-01T15:30:00.000Z,39.7392,-104.9903,15.2,4.1,ml,22,88,0.07,0.16,us,us12346789,2023-12-01T15:35:00.000Z,"6km SE of Denver, CO",earthquake,1.0,2.2,0.13,16,reviewed,us,us
+2023-12-01T16:45:00.000Z,47.6062,-122.3321,9.5,3.5,ml,16,98,0.09,0.13,uw,uw56781234,2023-12-01T16:50:00.000Z,"7km W of Seattle, WA",earthquake,1.1,1.9,0.12,11,automatic,uw,uw
+2023-12-01T18:12:00.000Z,25.7617,-80.1918,11.3,2.8,ml,14,105,0.11,0.17,pr,pr34567890,2023-12-01T18:17:00.000Z,"8km S of Miami, FL",earthquake,1.4,2.3,0.14,9,reviewed,pr,pr
+2023-12-01T19:28:00.000Z,32.7767,-96.7970,7.9,3.7,ml,19,91,0.05,0.15,tx,tx78901234,2023-12-01T19:33:00.000Z,"5km NW of Dallas, TX",earthquake,0.8,1.8,0.10,13,automatic,tx,tx
+2023-12-01T20:55:00.000Z,42.3601,-71.0589,13.7,2.6,ml,11,115,0.13,0.19,ld,ld23456789,2023-12-01T21:00:00.000Z,"9km NE of Boston, MA",earthquake,1.6,2.6,0.16,7,reviewed,ld,ld
+2023-12-01T22:18:00.000Z,33.4484,-112.0740,14.8,4.0,ml,21,89,0.06,0.14,az,az90123456,2023-12-01T22:23:00.000Z,"10km E of Phoenix, AZ",earthquake,0.9,2.1,0.12,15,automatic,az,az
