@@ -40,8 +40,8 @@ function transformRawEarthquakeData(raw: RawEarthquakeData): EarthquakeData | nu
       magError: raw.magError ? parseFloat(raw.magError) : undefined,
       magNst: raw.magNst ? parseInt(raw.magNst, 10) : undefined,
       nst: raw.nst ? parseInt(raw.nst, 10) : undefined,
-      locationSource: raw.locationSource,
-      magSource: raw.magSource,
+      // locationSource: raw.locationSource, // Not in interface
+      // magSource: raw.magSource, // Not in interface
     };
   } catch {
     return null;
@@ -104,7 +104,7 @@ export function useStreamingEarthquakeData(options: UseStreamingEarthquakeDataOp
       const streamingOptions: StreamingParseOptions = {
         pageSize,
         page,
-        onChunk: (data, progress) => {
+        onChunk: (_, progress) => {
           setState(prev => ({
             ...prev,
             progress: Math.round((progress / prev.totalRows) * 100)

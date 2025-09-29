@@ -26,6 +26,9 @@ export function EarthquakeTable({
       className={className}
       visibleItems={visibleItems}
       itemHeight={itemHeight}
+      sortField="magnitude"
+      sortDirection="desc"
+      onSort={() => {}}
     />
   );
 }

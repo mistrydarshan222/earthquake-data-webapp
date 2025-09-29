@@ -4,6 +4,9 @@ import type { EarthquakeData, NumericEarthquakeField } from '../../types';
 import { EARTHQUAKE_FIELD_LABELS } from '../../types';
 import { useSelection } from '../../hooks';
 
+// Performance constants
+const MAX_CHART_POINTS = 2000;
+
 interface EarthquakeScatterPlotProps {
   data: EarthquakeData[];
   xAxis: NumericEarthquakeField;
@@ -20,11 +23,19 @@ export const EarthquakeScatterPlot = React.memo(({
   const { selectedEarthquake, setSelectedEarthquake } = useSelection();
 
   const chartData = useMemo(() => {
-    return data.map(earthquake => ({
+    let processedData = data.map(earthquake => ({
       ...earthquake,
       x: earthquake[xAxis],
       y: earthquake[yAxis],
     }));
+
+    // Sample data for performance if dataset is large
+    if (processedData.length > MAX_CHART_POINTS) {
+      const step = Math.ceil(processedData.length / MAX_CHART_POINTS);
+      processedData = processedData.filter((_, index) => index % step === 0);
+    }
+
+    return processedData;
   }, [data, xAxis, yAxis]);
 
   const xAxisLabel = useMemo(() => EARTHQUAKE_FIELD_LABELS[xAxis], [xAxis]);
@@ -52,26 +63,27 @@ export const EarthquakeScatterPlot = React.memo(({
     return Math.max(2, Math.min(6, magnitude * 1.2));
   };
 
-  const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: Array<{ payload: EarthquakeData & { x: number; y: number } }> }) => {
-    if (active && payload && payload.length) {
-      const data = payload[0].payload;
-      return (
-        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
-          <p className="font-semibold text-gray-900">{data.place}</p>
-          <div className="space-y-1 text-sm">
-            <p><span className="text-gray-600">Magnitude:</span> {data.magnitude}</p>
-            <p><span className="text-gray-600">{xAxisLabel}:</span> {Number(data.x).toFixed(3)}</p>
-            <p><span className="text-gray-600">{yAxisLabel}:</span> {Number(data.y).toFixed(3)}</p>
-            <p><span className="text-gray-600">Depth:</span> {data.depth.toFixed(1)} km</p>
-            <p className="text-xs text-gray-500">
-              {new Date(data.time).toLocaleString()}
-            </p>
+  const CustomTooltip = useMemo(() => 
+    React.memo(({ active, payload }: { active?: boolean; payload?: Array<{ payload: EarthquakeData & { x: number; y: number } }> }) => {
+      if (active && payload && payload.length) {
+        const data = payload[0].payload;
+        return (
+          <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg max-w-xs">
+            <p className="font-semibold text-gray-900 truncate" title={data.place}>{data.place}</p>
+            <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-sm mt-2">
+              <p><span className="text-gray-600">Magnitude:</span> <span className="font-medium">{data.magnitude}</span></p>
+              <p><span className="text-gray-600">Depth:</span> <span className="font-medium">{data.depth.toFixed(1)} km</span></p>
+              <p className="col-span-2"><span className="text-gray-600">{xAxisLabel}:</span> <span className="font-medium">{Number(data.x).toFixed(3)}</span></p>
+              <p className="col-span-2"><span className="text-gray-600">{yAxisLabel}:</span> <span className="font-medium">{Number(data.y).toFixed(3)}</span></p>
+              <p className="text-xs text-gray-500 col-span-2">
+                {new Date(data.time).toLocaleString()}
+              </p>
+            </div>
           </div>
-        </div>
-      );
-    }
-    return null;
-  };
+        );
+      }
+      return null;
+    }), [xAxisLabel, yAxisLabel]);
 
   if (data.length === 0) {
     return (
@@ -93,7 +105,6 @@ export const EarthquakeScatterPlot = React.memo(({
         <ScatterChart
           data={chartData}
           margin={{ top: 20, right: 20, bottom: 60, left: 60 }}
-          isAnimationActive={false}
         >
           <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
           <XAxis
