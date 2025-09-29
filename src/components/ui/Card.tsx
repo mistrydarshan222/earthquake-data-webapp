@@ -20,29 +20,3 @@ export function Card({ children, className = '', padding = 'md' }: CardProps) {
     </div>
   );
 }
-
-interface CardHeaderProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-export function CardHeader({ children, className = '' }: CardHeaderProps) {
-  return (
-    <div className={`border-b border-gray-200 pb-3 mb-4 ${className}`}>
-      {children}
-    </div>
-  );
-}
-
-interface CardTitleProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-export function CardTitle({ children, className = '' }: CardTitleProps) {
-  return (
-    <h3 className={`text-lg font-medium text-gray-900 ${className}`}>
-      {children}
-    </h3>
-  );
-}

@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg';
@@ -52,22 +52,6 @@ export function LoadingSpinner({
         />
       </svg>
       <span className="sr-only">Loading...</span>
-    </div>
-  );
-}
-
-interface LoadingOverlayProps {
-  children?: React.ReactNode;
-  className?: string;
-}
-
-export function LoadingOverlay({ children, className = '' }: LoadingOverlayProps) {
-  return (
-    <div className={`flex flex-col items-center justify-center space-y-2 ${className}`}>
-      <LoadingSpinner size="lg" />
-      {children && (
-        <p className="text-sm text-gray-600">{children}</p>
-      )}
     </div>
   );
 }

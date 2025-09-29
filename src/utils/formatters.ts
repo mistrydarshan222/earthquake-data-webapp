@@ -3,41 +3,6 @@
  */
 
 /**
- * Format a date/time string to a user-friendly format
- */
-export function formatTime(timeString: string): string {
-  try {
-    const date = new Date(timeString);
-    return date.toLocaleString(undefined, {
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      year: 'numeric',
-    });
-  } catch {
-    return timeString;
-  }
-}
-
-/**
- * Format a date/time string to a compact format for tables
- */
-export function formatTimeCompact(timeString: string): string {
-  try {
-    const date = new Date(timeString);
-    return date.toLocaleString(undefined, {
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  } catch {
-    return timeString;
-  }
-}
-
-/**
  * Format a date to just the date portion
  */
 export function formatDate(timeString: string): string {
@@ -115,13 +80,6 @@ export function formatCoordinate(coordinate: number): string {
 }
 
 /**
- * Format coordinates as a pair
- */
-export function formatCoordinates(latitude: number, longitude: number): string {
-  return `${formatCoordinate(latitude)}, ${formatCoordinate(longitude)}`;
-}
-
-/**
  * Get magnitude color class based on magnitude value
  */
 export function getMagnitudeColor(magnitude: number): string {
@@ -160,13 +118,6 @@ export function formatStatus(status: string): {
 }
 
 /**
- * Format magnitude type for display
- */
-export function formatMagnitudeType(magType: string): string {
-  return magType.toUpperCase();
-}
-
-/**
  * Format large numbers with appropriate units (K, M, etc.)
  */
 export function formatLargeNumber(value: number): string {
@@ -200,16 +151,3 @@ export function formatDuration(milliseconds: number): string {
   return `${seconds} second${seconds !== 1 ? 's' : ''} ago`;
 }
 
-/**
- * Format time relative to now (e.g., "2 hours ago")
- */
-export function formatTimeAgo(timeString: string): string {
-  try {
-    const date = new Date(timeString);
-    const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
-    return formatDuration(diffMs);
-  } catch {
-    return timeString;
-  }
-}
